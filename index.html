@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aziz Aydi - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #eee;
+            --text: #333;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 70%; animation-delay: 2s; }
+        .shape:nth-child(3) { width: 100px; height: 100px; top: 30%; left: 80%; animation-delay: 4s; }
+        .shape:nth-child(4) { width: 40px; height: 40px; top: 80%; left: 20%; animation-delay: 1s; }
+        .shape:nth-child(5) { width: 120px; height: 120px; top: 10%; left: 60%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 26, 46, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light);
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            margin: 2rem;
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: white;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            color: var(--light);
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 0 2rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            animation: slideInLeft 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+
+        .timeline-content h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .date {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-content li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 0 2rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            color: var(--light);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            margin: 2rem;
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-method {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-method i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .contact-method h3 {
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-method p {
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        .contact-method a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Aziz Aydi</div>
+            <ul class="nav-links">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#experience">Expérience</a></li>
+                <li><a href="#projects">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Aziz Aydi</h1>
+            <h2 class="hero-subtitle">Ingénieur Informatique - Génie Logiciel</h2>
+            <p class="hero-description">
+                Passionné par la conception et la création d'applications performantes, 
+                alliant architecture logicielle robuste et solutions innovantes. 
+                Spécialisé dans le développement full-stack et l'intégration de services tiers.
+            </p>
+            <a href="#contact" class="cta-button">Me contacter</a>
+            <a href="#about" class="cta-button">En savoir plus</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="about fade-in">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="about-text">
+                    <h3>Ingénieur en Génie Logiciel</h3>
+                    <p>
+                        Diplômé de l'École Supérieure Privée d'Ingénierie et de Technologies (ESPRIT), 
+                        je suis un développeur full-stack passionné avec une expertise en architecture 
+                        logicielle moderne et développement d'applications scalables.
+                    </p>
+                    <p>
+                        Mon expérience couvre le développement web et mobile, l'intégration de services 
+                        tiers, l'optimisation des performances et le déploiement d'applications conteneurisées.
+                    </p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Tunis, Tunisie</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+216 52 269 577</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>azizaydi33@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <h2 class="section-title">Expériences Professionnelles</h2>
+        <div class="experience">
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Développeur Full Stack</h3>
+                        <div class="date">Février 2025 - Juillet 2025</div>
+                        <h4>InotekPlus, Canada</h4>
+                        <ul>
+                            <li>Développement d'une application complète de mise en relation clients-prestataires</li>
+                            <li>Architecture backend en Django et PostgreSQL modulaire et extensible</li>
+                            <li>Frontend interactif en Angular avec tableaux de bord multi-utilisateurs</li>
+                            <li>Intégration d'un agent conversationnel pour guider les commandes</li>
+                            <li>Déploiement Docker orchestré pour environnement de production</li>
+                        </ul>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Rasa</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Jenkins</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Développeur Full Stack</h3>
+                        <div class="date">Juin 2024 - Août 2024</div>
+                        <h4>International Consulting, Canada</h4>
+                        <ul>
+                            <li>Développement d'une application Low-Code pour création d'interfaces utilisateur</li>
+                            <li>Module Gestion UI permettant la création d'interfaces interactives intuitives</li>
+                            <li>Intégration complète Django/Angular assurant modularité et réactivité</li>
+                        </ul>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Jira</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Stagiaire en Immersion Entreprise</h3>
+                        <div class="date">Juin 2023 - Août 2023</div>
+                        <h4>VACPA Boudjbel, Tunis</h4>
+                        <ul>
+                            <li>Mise en place d'un service de gestion de tickets GLPI</li>
+                            <li>Personnalisation interface et adaptation flux de travail</li>
+                            <li>Formation utilisateurs et accompagnement déploiement</li>
+                            <li>Observation architecture réseau de l'usine</li>
+                        </ul>
+                        <div class="skills-tags">
+                            <span class="skill-tag">GLPI</span>
+                            <span class="skill-tag">Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">Projets Académiques</h2>
+        <div class="projects">
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <h3><i class="fas fa-cogs"></i> Automatisation CI/CD</h3>
+                    <p>
+                        Création d'un pipeline CI/CD complet avec Jenkins, analyse de qualité 
+                        de code avec SonarQube, et gestion des conteneurs Docker. 
+                        Mise en place de surveillance avec Prometheus et Grafana.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">SonarQube</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">Grafana</span>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <h3><i class="fas fa-home"></i> Application Colocation & Covoiturage</h3>
+                    <p>
+                        Développement d'une application complète de colocation et covoiturage 
+                        avec Spring Boot et Angular. Analyse des besoins, conception UI/UX, 
+                        et développement en tant que SCRUM Master.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">Angular</span>
+                        <span class="skill-tag">SCRUM</span>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <h3><i class="fas fa-code"></i> Application Web Symfony</h3>
+                    <p>
+                        Conception, implémentation et débogage des fonctionnalités 
+                        d'une application web développée en Symfony et Java. 
+                        Gestion de version avec Git.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Symfony</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="contact fade-in">
+            <h2 class="section-title">Me contacter</h2>
+            <p style="color: var(--light); opacity: 0.8; margin-bottom: 2rem;">
+                N'hésitez pas à me contacter pour discuter d'opportunités professionnelles 
+                ou de collaborations sur des projets innovants.
+            </p>
+            <div class="contact-grid">
+                <div class="contact-method">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p><a href="mailto:azizaydi33@gmail.com">azizaydi33@gmail.com</a></p>
+                </div>
+                <div class="contact-method">
+                    <i class="fas fa-phone"></i>
+                    <h3>Téléphone</h3>
+                    <p><a href="tel:+21652269577">+216 52 269 577</a></p>
+                </div>
+                <div class="contact-method">
+                    <i class="fab fa-linkedin"></i>
+                    <h3>LinkedIn</h3>
+                    <p><a href="#">Profil LinkedIn</a></p>
+                </div>
+                <div class="contact-method">
+                    <i class="fab fa-github"></i>
+                    <h3>GitHub</h3>
+                    <p><a href="#">Profil GitHub</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Timeline items animation delay
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Project cards hover effect with 3D transform
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+            });
+        });
+
+        // Add typing effect to hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero-title');
+            const originalText = heroTitle.innerText;
+            typeWriter(heroTitle, originalText, 150);
+        });
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.1 + (index * 0.05);
+                const yPos = -(scrollTop * speed);
+                shape.style.transform = `translateY(${yPos}px) rotate(${scrollTop * 0.1}deg)`;
+            });
+        });
+
+        // Contact methods hover animation
+        document.querySelectorAll('.contact-method').forEach(method => {
+            method.addEventListener('mouseenter', function() {
+                this.querySelector('i').style.transform = 'scale(1.2) rotate(10deg)';
+                this.querySelector('i').style.transition = 'all 0.3s ease';
+            });
+            
+            method.addEventListener('mouseleave', function() {
+                this.querySelector('i').style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Skill tags animation
+        document.querySelectorAll('.skill-tag').forEach((tag, index) => {
+            tag.style.animationDelay = `${index * 0.1}s`;
+            tag.style.animation = 'fadeInUp 0.6s ease forwards';
+        });
+
+        // Add glitch effect to logo on hover
+        const logo = document.querySelector('.logo');
+        logo.addEventListener('mouseenter', function() {
+            this.style.animation = 'glitch 0.5s ease-in-out';
+        });
+
+        // Add CSS for glitch animation
+        const glitchStyle = document.createElement('style');
+        glitchStyle.textContent = `
+            @keyframes glitch {
+                0% { transform: translate(0); }
+                20% { transform: translate(-2px, 2px); }
+                40% { transform: translate(-2px, -2px); }
+                60% { transform: translate(2px, 2px); }
+                80% { transform: translate(2px, -2px); }
+                100% { transform: translate(0); }
+            }
+            
+            .skill-tag {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            /* Mobile menu toggle */
+            .mobile-menu-toggle {
+                display: none;
+                background: none;
+                border: none;
+                color: var(--light);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            
+            @media (max-width: 768px) {
+                .mobile-menu-toggle {
+                    display: block;
+                }
+                
+                .nav-links {
+                    position: fixed;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    background: rgba(26, 26, 46, 0.95);
+                    backdrop-filter: blur(10px);
+                    flex-direction: column;
+                    padding: 2rem 0;
+                    transform: translateY(-100%);
+                    transition: transform 0.3s ease;
+                    display: flex;
+                }
+                
+                .nav-links.active {
+                    transform: translateY(0);
+                }
+                
+                .nav-links li {
+                    margin: 0.5rem 0;
+                    text-align: center;
+                }
+            }
+            
+            /* Enhanced loading animation */
+            .loading {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--dark);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                transition: opacity 0.5s ease;
+            }
+            
+            .loading.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+            
+            .loader {
+                width: 60px;
+                height: 60px;
+                border: 3px solid rgba(102, 126, 234, 0.3);
+                border-top: 3px solid var(--primary);
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+            
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            
+            /* Enhanced project cards with flip effect */
+            .project-card {
+                position: relative;
+                height: 300px;
+                cursor: pointer;
+                transform-style: preserve-3d;
+                transition: transform 0.6s;
+            }
+            
+            .project-card:hover {
+                transform: rotateY(180deg) translateY(-10px);
+            }
+            
+            .card-front, .card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                border-radius: 20px;
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .card-back {
+                background: linear-gradient(135deg, var(--primary), var(--accent));
+                transform: rotateY(180deg);
+                color: white;
+            }
+            
+            .card-back h4 {
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+            }
+            
+            .card-back .tech-details {
+                font-size: 0.9rem;
+                opacity: 0.9;
+                line-height: 1.6;
+            }
+        `;
+        document.head.appendChild(glitchStyle);
+
+        // Add mobile menu functionality
+        const navContainer = document.querySelector('.nav-container');
+        const menuToggle = document.createElement('button');
+        menuToggle.className = 'mobile-menu-toggle';
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        navContainer.appendChild(menuToggle);
+
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Add loading screen
+        const loading = document.createElement('div');
+        loading.className = 'loading';
+        loading.innerHTML = '<div class="loader"></div>';
+        document.body.appendChild(loading);
+
+        // Hide loading screen when page is fully loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loading.classList.add('hidden');
+                setTimeout(() => {
+                    loading.remove();
+                }, 500);
+            }, 1000);
+        });
+
+        // Enhanced project cards with detailed information
+        const projectDetails = {
+            0: {
+                title: "Pipeline DevOps Complet",
+                details: "Architecture complète incluant tests automatisés, déploiement continu, monitoring en temps réel et alertes personnalisées. Intégration avec Slack pour notifications d'équipe."
+            },
+            1: {
+                title: "Plateforme Collaborative",
+                details: "Interface utilisateur intuitive avec système de matching intelligent, géolocalisation, système de notation et paiements sécurisés intégrés."
+            },
+            2: {
+                title: "Application Enterprise",
+                details: "Architecture MVC robuste avec système d'authentification avancé, API REST documentée et interface d'administration complète."
+            }
+        };
+
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            const cardFront = document.createElement('div');
+            cardFront.className = 'card-front';
+            cardFront.innerHTML = card.innerHTML;
+            
+            const cardBack = document.createElement('div');
+            cardBack.className = 'card-back';
+            cardBack.innerHTML = `
+                <h4>${projectDetails[index].title}</h4>
+                <p class="tech-details">${projectDetails[index].details}</p>
+            `;
+            
+            card.innerHTML = '';
+            card.appendChild(cardFront);
+            card.appendChild(cardBack);
+        });
+
+        // Add easter egg - Konami code
+        let konamiCode = [];
+        const konamiSequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                // Easter egg animation
+                document.body.style.animation = 'rainbow 2s infinite';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                    alert('🎉 Code secret activé ! Merci d\'avoir exploré mon portfolio !');
+                }, 2000);
+            }
+        });
+
+        // Add rainbow animation for easter egg
+        const rainbowStyle = document.createElement('style');
+        rainbowStyle.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(rainbowStyle);
+
+        // Add particles animation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 4px;
+                height: 4px;
+                background: linear-gradient(45deg, var(--primary), var(--accent));
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: -1;
+                opacity: 0;
+                animation: particle-float 3s ease-out forwards;
+            `;
+            
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 3000);
+        }
+
+        // Add particle animation CSS
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes particle-float {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(particleStyle);
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+
+        // Add text reveal animation for sections
+        function revealText(element) {
+            const text = element.textContent;
+            element.innerHTML = '';
+            
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.style.opacity = '0';
+                span.style.animation = `reveal-char 0.05s ease forwards ${i * 0.02}s`;
+                element.appendChild(span);
+            });
+        }
+
+        const revealStyle = document.createElement('style');
+        revealStyle.textContent = `
+            @keyframes reveal-char {
+                to { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(revealStyle);
+
+        // Apply text reveal to section titles when they become visible
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.revealed) {
+                    entry.target.dataset.revealed = 'true';
+                    revealText(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.section-title').forEach(title => {
+            titleObserver.observe(title);
+        });
+
+        console.log('🚀 Portfolio Aziz Aydi - Prêt à impressionner !');
+        console.log('💡 Essayez le code Konami pour une surprise !');
+    </script>
+</body>
+</html>
